@@ -66,9 +66,9 @@ while True:
 
     # 측정된 값을 그래프로  보여주기 ===========================
 
-        imgPlot = plotY.update(len_Ver)
-        img = cv2.resize(img, (640, 360))
-        imgstack = cvzone.stackImages([img, imgPlot], 1, 1)
+        #imgPlot = plotY.update(len_Ver)
+        #img = cv2.resize(img, (640, 360))
+        #imgstack = cvzone.stackImages([img, imgPlot], 1, 1)
 
     # 이 밑은 단순히 이미지를 띄우고, 종료하는 부분 ===================
     cv2.imshow("Image", img)
