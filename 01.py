@@ -5,14 +5,14 @@ from cvzone.PlotModule import LivePlot
 # Import some Libraries
 
 
-#cap = cv2.VideoCapture("eyeblink.mp4")
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("eyeblink.mp4")
+#cap = cv2.VideoCapture(0)
 
 detector = FaceMeshDetector(maxFaces=1)
 #ret = cap.set(3,360) # height , 세로 길이
 #ret = cap.set(4,640) # width, 가로 길이
 
-plotY = LivePlot(640,360,[0,40],invert=True)
+plotY = LivePlot(640,360,[0,40],invert=True) # 가로 , 세로 , y축 범위
 
 eyepointList = [22, 23, 24, 110, 157, 158, 159, 160, 161, 130, 243]
 ratiolist = []
