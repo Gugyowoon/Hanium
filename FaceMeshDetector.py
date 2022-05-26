@@ -5,9 +5,10 @@ import cv2
 import cvzone
 from cvzone.PlotModule import LivePlot
 
-cap = cv2.VideoCapture(0)  # 웹캠 오픈
-detector = FaceMeshDetector(maxFaces=5)  # para : maxFaces - 탐지할 최대 안면의 개수
-eyepointList = [22, 23, 24, 110, 157, 158, 159, 160, 161, 130, 243]  # 오른쪽 눈의 랜드마크 포인트 (화면상 왼쪽)
+cap = cv2.VideoCapture(0)  # 웹캠 오픈, 번호에 대한 설명은 없다. 대충 0부터 1씩 증가시키면서 찍어봐야 하는듯????
+detector = FaceMeshDetector(maxFaces=5)  # 메소드의 para : maxFaces - 탐지할 최대 안면의 개수 - 좀 더 자세한 정보는 없나
+#eyepointList = [22, 23, 24, 110, 157, 158, 159, 160, 161, 130, 243]  # 오른쪽 눈의 랜드마크 포인트 (화면상 왼쪽)
+eyepointList = [144,145,153,158,159,160]  # 새롭게 설정한 오른눈 랜드마크 포인트 (화면상 왼쪽
 want_color = (135, 254, 66)  # bright green
 want_color2 = (242, 178, 200)  # pale pink
 ratiolist = []  # 점간 거리를 저장할 리스트 자료
@@ -17,7 +18,7 @@ plotY = LivePlot(640,360,[0,40],invert=True) # 역할을 잘 모르겠음
 while True:
     success, img = cap.read()
     # read 기능 == Grabs, decodes and returns the next video frame // return 값 == img(읽은 프레임), success(True 또는 False).
-    img, faces = detector.findFaceMesh(img)#, draw=False)
+    img, faces = detector.findFaceMesh(img)
     # findFaceMesh 기능 == Finds face landmarks in BGR Image //  return값 == 리스트 형태 Image와 faces를 반환함  faces는 빈 리스트로 초기화 된다.   drawings은 있을 수도, 없을 수도 있음
     # para 1 : img , Image to find the face landmarks in.
     # para 2 : draw: Flag to draw the output on the image. 이거 디폴트값이 True인데, 이대루 두면 흰색 메쉬 처리 합본이 그대로 뜬다. 없애고 싶으면 draw=False 설정
@@ -45,7 +46,7 @@ while True:
 
         len_Ver, _ = detector.findDistance(leftup, leftdown)  # 두 점간 길이를 구함
         #<<임시>># len_Hor, _ = detector.findDistance(leftLeft,leftRight)  # 반환 자료가 distance 말고도 여러개라서 무시하기 위해 (, _) 를 사용해 준 것으로 보임
-        # findDistance 기능 == 두 점간 거리를 구한다.
+        # findDistance 기능 == 피타고라스 이론을 기반으로 두 점간 거리를 구한다. (Eucladian Distance)
         # para 1 : p1, Point1
         # para 2 : p2, Point2
         # return : Distance between the point(1. 두 점간 거리) , Image with output drawn(2. 결과를 반영한 이미지), Line information (각 점의 x,y 좌표와 축 상 좌표거리)
